@@ -1,0 +1,28 @@
+{
+  "name": "proverb_typing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/main.js",
+  "scripts": {
+    "start": "electron ./dist/main.js",
+    "build": "webpack && npm run start",
+    "pack-mac": "electron-packager . proverb_typing --asar --overwrite --platform=darwin --arch=x64",
+    "pack-win": "electron-packager . proverb_typing --asar --overwrite --platform=win32 --arch=x64",
+    "pack-linux": "electron-packager . proverb_typing --asar --overwrite --platform=linux --arch=x64",
+    "package": "npm run pack-mac && npm run pack-win && npm run pack-linux"
+  },
+  "author": "gut",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/electron": "^1.4.31",
+    "@types/node": "^7.0.0",
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "electron": "^1.4.14",
+    "electron-packager": "^8.5.0",
+    "ts-loader": "^1.3.3",
+    "typescript": "^2.1.5",
+    "webpack": "^1.14.0"
+  }
+}
