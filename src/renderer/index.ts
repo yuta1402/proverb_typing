@@ -1,7 +1,9 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import QuestionGenerator from './questionGenerator'
+import TypeMissDetector from './typeMissDetector'
 
+const tmd = new TypeMissDetector('nagoya', 'naguya');
 
 const randomInt = (low: number, high: number) => {
     return Math.floor(Math.random() * (high - low + 1) + low);
