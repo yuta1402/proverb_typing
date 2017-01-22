@@ -2,6 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import QuestionGenerator from './questionGenerator'
 import TypeMissDetector from './typeMissDetector'
+import Stopwatch from './stopwatch'
 
 const randomInt = (low: number, high: number) => {
     return Math.floor(Math.random() * (high - low + 1) + low);
@@ -74,4 +75,11 @@ document.addEventListener('keydown', (e) => {
 
     keyQueue += e.key;
     typedWordElement.textContent = keyQueue;
+});
+
+const currentTimeElement = document.getElementById('currentTime');
+const stopwatch = new Stopwatch();
+
+stopwatch.start((t) => {
+    currentTimeElement.textContent = t.sec.toString();
 });
