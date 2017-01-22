@@ -1,7 +1,18 @@
 interface Time {
     ms: number;
     sec: number;
+    clock: string;
 }
+
+const toDoubleDigits = (num: number) => {
+    let str = num.toString();
+
+    if(str.length === 1) {
+        str = ('0' + str).slice(-2);
+    }
+
+    return str;
+};
 
 export default class Stopwatch {
     private startTime_: Date;
@@ -34,5 +45,14 @@ export default class Stopwatch {
 
     get ms(): number {
         return this.elapsedMillisec_;
+    }
+
+    get clock(): string {
+        const s = this.sec % 60;
+        const m = Math.floor(this.sec / 60);
+
+        const t = toDoubleDigits(m) + ':' + toDoubleDigits(s);
+
+        return t;
     }
 }

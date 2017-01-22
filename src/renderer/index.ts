@@ -81,5 +81,5 @@ const currentTimeElement = document.getElementById('currentTime');
 const stopwatch = new Stopwatch();
 
 stopwatch.start((t) => {
-    currentTimeElement.textContent = t.sec.toString();
+    currentTimeElement.textContent = t.clock;
 });
