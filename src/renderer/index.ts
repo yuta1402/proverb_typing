@@ -21,6 +21,14 @@ const questionGenerator = new QuestionGenerator();
 japaneseWordElement.textContent = questionGenerator.currentJapanese();
 originalWordElement.textContent = questionGenerator.currentEnglish();
 
+japaneseWordElement.addEventListener('animationend', (e) => {
+    japaneseWordElement.classList.remove('text-scale-up');
+});
+
+originalWordElement.addEventListener('animationend', (e) => {
+    originalWordElement.classList.remove('text-scale-up');
+});
+
 const statementFilePath: string = path.join(__dirname, 'data/statement.json');
 
 document.addEventListener('keydown', (e) => {
@@ -54,6 +62,10 @@ document.addEventListener('keydown', (e) => {
 
         japaneseWordElement.textContent = q.japanese;
         originalWordElement.textContent = q.english;
+
+        japaneseWordElement.classList.add('text-scale-up');
+        originalWordElement.classList.add('text-scale-up');
+
         keyQueue = '';
         typedWordElement.textContent = '';
 
