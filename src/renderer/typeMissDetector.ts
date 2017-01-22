@@ -1,5 +1,44 @@
 type Grid = Array<Array<number>>;
 
+const backTrace = (gd: Grid, path: Grid, jframe: number, iframe: number) => {
+    let j = jframe;
+    let i = iframe;
+    let back = path[jframe][iframe];
+
+    let insertionError = 0;
+    let deletionError = 0;
+    let replacementError = 0;
+
+    while(1) {
+        if(j <= 0 && i <= 0) {
+            break;
+        }
+
+        if(back == 1) {
+            ++insertionError;
+            --i;
+        } else if(back == 3) {
+            ++deletionError;
+            --j;
+        } else {
+            const prevDistance = gd[j][i];
+            --j;
+            --i;
+            if(prevDistance > gd[j][i]) {
+                ++replacementError;
+            }
+        }
+
+        back = path[j][i];
+    }
+
+    return {
+        insertionError,
+        deletionError,
+        replacementError
+    };
+}
+
 export default class TypeMissDetector {
     private _insertionError: number = 0;
     private _deletionError: number = 0;
@@ -33,7 +72,7 @@ export default class TypeMissDetector {
             gd[0][i] = i;
         }
 
-        // initialize local distance
+        // calculate local distance
         for(let j = 1; j < jframe+1; ++j) {
             for(let i = 1; i < iframe+1; ++i) {
                 ld[j][i] = 0;
@@ -64,31 +103,11 @@ export default class TypeMissDetector {
         }
 
         // backtrace
-        let jback = jframe;
-        let iback = iframe;
-        let backPath = path[jframe][iframe];
-        while(1) {
-            if(jback <= 0 && iback <= 0) {
-                break;
-            }
+        const { insertionError, deletionError, replacementError } = backTrace(gd, path, jframe, iframe);
 
-            if(backPath == 1) {
-                ++this._insertionError;
-                --iback;
-            } else if(backPath == 3) {
-                ++this._deletionError;
-                --jback;
-            } else {
-                const prevDistance = gd[jback][iback];
-                --jback;
-                --iback;
-                if(prevDistance > gd[jback][iback]) {
-                    this._replacementError++;
-                }
-            }
-
-            backPath = path[jback][iback];
-        }
+        this._insertionError = insertionError;
+        this._deletionError = deletionError;
+        this._replacementError = replacementError;
     }
 
     get insertionError(): number {
