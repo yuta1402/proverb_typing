@@ -11,6 +11,7 @@ const validKeyListFilePath: string = path.join(__dirname, 'data/validKeyList.jso
 const validKeys: Array<string> = JSON.parse(fs.readFileSync(validKeyListFilePath, 'utf-8'));
 
 let keyQueue = '';
+let isEnd = false;
 const japaneseWordElement = document.getElementById('japaneseWord');
 const originalWordElement = document.getElementById('originalWord');
 const typedWordElement = document.getElementById('typedWord');
@@ -22,9 +23,11 @@ originalWordElement.textContent = questionGenerator.currentEnglish();
 
 const statementFilePath: string = path.join(__dirname, 'data/statement.json');
 
-// const globalDistance = new Array<Array<number>>();
-
 document.addEventListener('keydown', (e) => {
+    if(isEnd) {
+        return;
+    }
+
     if(e.key == 'Escape') {
         keyQueue = '';
         typedWordElement.textContent = '';
@@ -45,6 +48,7 @@ document.addEventListener('keydown', (e) => {
         const q = questionGenerator.next();
 
         if(q === null) {
+            isEnd = true;
             return;
         }
 
