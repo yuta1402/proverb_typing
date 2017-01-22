@@ -1,9 +1,51 @@
-type Grid = Array<Array<number>>;
+import Grid from './grid'
 
-const backTrace = (gd: Grid, path: Grid, jframe: number, iframe: number) => {
-    let j = jframe;
-    let i = iframe;
-    let back = path[jframe][iframe];
+const initializeGlobalDistance = (gd: Grid<number>) => {
+    for(let i = 0; i < gd.width; ++i) {
+        gd.set(i, 0, i);
+    }
+
+    for(let j = 0; j < gd.height; ++j) {
+        gd.set(0, j, j);
+    }
+};
+
+const calculateLocalDistance = (ld: Grid<number>, regist: string, input: string) => {
+    for(let i = 1; i < ld.width; ++i) {
+        for(let j = 1; j < ld.height; ++j) {
+            ld.set(i, j, 0);
+
+            if(regist[j-1] !== input[i-1]) {
+                ld.set(i, j, 1);
+            }
+        }
+    }
+}
+
+const calculateGlobalDistance = (gd: Grid<number>, ld: Grid<number>, path: Grid<number>) => {
+    for(let i = 1; i < gd.width; ++i) {
+        for(let j = 1; j < gd.height; ++j) {
+            const d1 = gd.get(i-1, j  ) +   ld.get(i, j);
+            const d2 = gd.get(i-1, j-1) + 2*ld.get(i, j);
+            const d3 = gd.get(i  , j-1) +   ld.get(i, j);
+
+            gd.set(i, j, Math.min(d1, d2, d3));
+
+            // コストが同じ場合は経路2を優先
+            if(gd.get(i, j) == d2) {
+                path.set(i, j, 2);
+            } else {
+                const distances = new Array(d1, d2, d3);
+                path.set(i, j, distances.indexOf(gd.get(i, j))+1);
+            }
+        }
+    }
+}
+
+const backTrace = (gd: Grid<number>, path: Grid<number>) => {
+    let i = path.width;
+    let j = path.height;
+    let back = path.get(i, j);
 
     let insertionError = 0;
     let deletionError = 0;
@@ -21,15 +63,15 @@ const backTrace = (gd: Grid, path: Grid, jframe: number, iframe: number) => {
             ++deletionError;
             --j;
         } else {
-            const prevDistance = gd[j][i];
+            const prevDistance = gd.get(i, j);
             --j;
             --i;
-            if(prevDistance > gd[j][i]) {
+            if(prevDistance > gd.get(i, j)) {
                 ++replacementError;
             }
         }
 
-        back = path[j][i];
+        back = path.get(i, j);
     }
 
     return {
@@ -37,7 +79,7 @@ const backTrace = (gd: Grid, path: Grid, jframe: number, iframe: number) => {
         deletionError,
         replacementError
     };
-}
+};
 
 export default class TypeMissDetector {
     private _insertionError: number = 0;
@@ -48,62 +90,16 @@ export default class TypeMissDetector {
         const jframe: number = regist.length;
         const iframe: number = input.length;
 
-        let ld: Grid = new Array(jframe+1);
-        let gd: Grid = new Array(jframe+1);
-        let path: Grid = new Array(jframe+1);
+        let ld = new Grid<number>(iframe+1, jframe+1, 0);
+        let gd = new Grid<number>(iframe+1, jframe+1, 0);
+        let path = new Grid<number>(iframe+1, jframe+1, 0);
 
-        for(let j = 0; j < jframe+1; ++j) {
-            ld[j] = new Array(iframe+1);
-            gd[j] = new Array(iframe+1);
-            path[j] = new Array(iframe+1);
-
-            ld[j].fill(0);
-            gd[j].fill(0);
-            path[j].fill(0);
-        }
-
-        // initialize global distance
-        for(let j = 0; j < jframe+1; ++j) {
-            gd[j][0] = j;
-        }
-
-        // initialize global distance
-        for(let i = 0; i < iframe+1; ++i) {
-            gd[0][i] = i;
-        }
-
-        // calculate local distance
-        for(let j = 1; j < jframe+1; ++j) {
-            for(let i = 1; i < iframe+1; ++i) {
-                ld[j][i] = 0;
-
-                if(regist[j-1] !== input[i-1]) {
-                    ld[j][i] = 1
-                }
-            }
-        }
-
-        // calculate global distance
-        for(let j = 1; j < jframe+1; ++j) {
-            for(let i = 1; i < iframe+1; ++i) {
-                const d1 = gd[j][i-1] + ld[j][i];
-                const d2 = gd[j-1][i-1] + 2*ld[j][i];
-                const d3 = gd[j-1][i] + ld[j][i];
-
-                gd[j][i] = Math.min(d1, d2, d3);
-
-                // コストが同じ場合は経路2を優先
-                if(gd[j][i] == d2) {
-                    path[j][i] = 2;
-                } else {
-                    const distances = new Array(d1, d2, d3);
-                    path[j][i] = distances.indexOf(gd[j][i])+1;
-                }
-            }
-        }
+        initializeGlobalDistance(gd);
+        calculateLocalDistance(ld, regist, input);
+        calculateGlobalDistance(gd, ld, path);
 
         // backtrace
-        const { insertionError, deletionError, replacementError } = backTrace(gd, path, jframe, iframe);
+        const { insertionError, deletionError, replacementError } = backTrace(gd, path);
 
         this._insertionError = insertionError;
         this._deletionError = deletionError;
