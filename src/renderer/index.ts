@@ -17,7 +17,7 @@ const japaneseWordElement = document.getElementById('japaneseWord');
 const originalWordElement = document.getElementById('originalWord');
 const typedWordElement = document.getElementById('typedWord');
 
-const questionGenerator = new QuestionGenerator();
+const questionGenerator = new QuestionGenerator(10);
 
 japaneseWordElement.textContent = questionGenerator.currentJapanese();
 originalWordElement.textContent = questionGenerator.currentEnglish();
