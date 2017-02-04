@@ -49,7 +49,7 @@ export default class Stopwatch {
 
     get clock(): string {
         const s = this.sec % 60;
-        const m = Math.floor(this.sec / 60);
+        const m = Math.floor(this.sec / 60) % 60;
 
         const t = toDoubleDigits(m) + ':' + toDoubleDigits(s);
 
