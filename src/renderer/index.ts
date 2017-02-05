@@ -6,20 +6,17 @@ import Stopwatch from './stopwatch'
 
 import { remote } from 'electron'
 
-const randomInt = (low: number, high: number) => {
-    return Math.floor(Math.random() * (high - low + 1) + low);
-};
-
 const validKeyListFilePath: string = path.join(__dirname, 'data/validKeyList.json');
 const validKeys: Array<string> = JSON.parse(fs.readFileSync(validKeyListFilePath, 'utf-8'));
 
 let keyQueue = '';
 let isEnd = false;
-const japaneseWordElement = document.getElementById('japaneseWord');
-const originalWordElement = document.getElementById('originalWord');
-const typedWordElement = document.getElementById('typedWord');
 
 const questionGenerator = new QuestionGenerator(10);
+
+const japaneseWordElement = document.getElementById('japaneseWord');
+const originalWordElement = document.getElementById('originalWord');
+const typedWordElement    = document.getElementById('typedWord');
 
 japaneseWordElement.textContent = questionGenerator.currentJapanese();
 originalWordElement.textContent = questionGenerator.currentEnglish();
@@ -31,8 +28,6 @@ japaneseWordElement.addEventListener('animationend', (e) => {
 originalWordElement.addEventListener('animationend', (e) => {
     originalWordElement.classList.remove('text-scale-up');
 });
-
-const statementFilePath: string = path.join(__dirname, 'data/statement.json');
 
 document.addEventListener('keydown', (e) => {
     if(isEnd) {
