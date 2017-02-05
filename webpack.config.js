@@ -10,7 +10,8 @@ module.exports = {
     },
     entry: {
         'main': './src/main/main.ts',
-        'index': './src/renderer/index.ts'
+        'index': './src/renderer/index.ts',
+        'title': './src/renderer/title.ts'
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.ts', '.tsx']

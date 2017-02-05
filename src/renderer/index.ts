@@ -4,6 +4,8 @@ import QuestionGenerator from './questionGenerator'
 import TypeMissDetector from './typeMissDetector'
 import Stopwatch from './stopwatch'
 
+import { remote } from 'electron'
+
 const randomInt = (low: number, high: number) => {
     return Math.floor(Math.random() * (high - low + 1) + low);
 };
