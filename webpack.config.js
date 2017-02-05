@@ -11,7 +11,8 @@ module.exports = {
     entry: {
         'main': './src/main/main.ts',
         'index': './src/renderer/index.ts',
-        'title': './src/renderer/title.ts'
+        'title': './src/renderer/title.ts',
+        'result': './src/renderer/result.ts'
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.ts', '.tsx']

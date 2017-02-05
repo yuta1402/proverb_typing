@@ -1,4 +1,5 @@
 import * as fs from 'fs'
+import * as url from 'url'
 import * as path from 'path'
 import QuestionGenerator from './questionGenerator'
 import TypeMissDetector from './typeMissDetector'
@@ -29,6 +30,8 @@ originalWordElement.addEventListener('animationend', (e) => {
     originalWordElement.classList.remove('text-scale-up');
 });
 
+const win = remote.getCurrentWindow();
+
 document.addEventListener('keydown', (e) => {
     if(isEnd) {
         return;
@@ -55,6 +58,13 @@ document.addEventListener('keydown', (e) => {
 
         if(q === null) {
             isEnd = true;
+
+            win.loadURL(url.format({
+                pathname: path.join(__dirname, 'result.html'),
+                protocol: 'file:',
+                slashes: true,
+            }));
+
             return;
         }
 
