@@ -8,6 +8,18 @@ const randomInt = (low: number, high: number) => {
     return Math.floor(Math.random() * (high - low + 1) + low);
 };
 
+// Fisher-Yaste Algorithm
+const randomShuffle = <T>(array: Array<T>) => {
+    let m = array.length;
+
+    while(m) {
+        const i = Math.floor(Math.random() * m--);
+        const t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+    }
+};
+
 interface Question {
     english: string;
     japanese: string;
@@ -27,9 +39,16 @@ export default class QuestionGenerator {
         this.index = 0;
         this.questions = new Array<Question>();
 
-        for (let i = 0; i < this.numQuestion; ++i) {
-            const r = randomInt(0, this.allQuestions.length - 1);
-            const it = this.allQuestions[r];
+        // for (let i = 0; i < this.numQuestion; ++i) {
+        //     const r = randomInt(0, this.allQuestions.length - 1);
+        //     const it = this.allQuestions[r];
+        //     this.questions.push(it);
+        // }
+
+        randomShuffle(this.allQuestions);
+
+        for(let i = 0; i < this.numQuestion; ++i) {
+            const it = this.allQuestions[i];
             this.questions.push(it);
         }
     }
