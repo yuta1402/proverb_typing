@@ -10,9 +10,11 @@ const createWindow = () => {
     win = new BrowserWindow({
         width: 960,
         height: 540,
-        resizable: true,
-        fullscreenable: true,
+        resizable: false,
+        fullscreenable: false,
     });
+
+    win.setMenu(null);
 
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'title.html'),
@@ -20,7 +22,7 @@ const createWindow = () => {
         slashes: true,
     }))
 
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
     win.on('closed', () => {
         win = null;
