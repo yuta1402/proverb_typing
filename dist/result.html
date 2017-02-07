@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+            html, body, #content {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                user-select: none;
+                -webkit-user-select: none;
+            }
+
+            body {
+                color: #fdf5e2;
+                background-color: #454e6f;
+                animation: fadeIn 2s ease 0s 1 normal;
+            }
+
+            @keyframes fadeIn {
+                  0% { opacity: 0; background-color: #fff; }
+                100% { opacity: 1; background-color: #454e6f; }
+            }
+
+            #content {
+                display: -webkit-flex;
+                -webkit-flex-direction: column;
+
+                display: flex;
+                flex-direction: column;
+
+                justify-content: center;
+                align-items: center;
+            }
+
+            h1 {
+                margin: 0;
+                margin-bottom: 20px;
+                font-size: 64px;
+            }
+
+            table {
+                /* border-collapse: separate; */
+                border-spacing: 0px;
+                /* line-height: 1.5; */
+                margin: 5px;
+            }
+
+            table th {
+                width: 160px;
+                padding: 10px;
+                font-weight: bold;
+                vertical-align: bottom;
+                border-bottom: solid 1px;
+            }
+
+            table td {
+                width: 150px;
+                padding: 10px;
+                font-size: 24px;
+                text-align: center;
+                vertical-align: top;
+                border-bottom: solid 1px;
+            }
+
+            p {
+                font-size: 24px;
+            }
+
+            .scores {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <h1>Result</h1>
+            <div class="scores">
+                <table>
+                    <tr>
+                        <th>問題文の総文字数</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th>入力した総文字数</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th>脱落誤り総数</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th>挿入誤り総数</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th>置換誤り総数</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th>時間[s]</th>
+                        <td>0</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>平均入力時間[key/ms]</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th>スコア</th>
+                        <td>0</td>
+                    </tr>
+                </table>
+            </div>
+            <p>Press space key to return title.</p>
+        </div>
+        <script src="./result.js"></script>
+    </body>
+</html>
