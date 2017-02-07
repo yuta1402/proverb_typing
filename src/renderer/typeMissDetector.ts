@@ -87,6 +87,14 @@ export default class TypeMissDetector {
     private _replacementError: number = 0;
 
     constructor(private regist: string, private input: string) {
+        // 入力が空文字列の場合
+        if(input.length == 0) {
+            this._insertionError = 0;
+            this._deletionError = regist.length;
+            this._replacementError = 0;
+            return;
+        }
+
         const jframe: number = regist.length;
         const iframe: number = input.length;
 
