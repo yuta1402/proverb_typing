@@ -51,8 +51,9 @@ document.addEventListener('keydown', (e) => {
     }
 
     if(e.key == 'Escape') {
-        keyQueue = '';
-        typedWordElement.textContent = '';
+        // keyQueue = '';
+        // typedWordElement.textContent = '';
+        win.close();
         return;
     }
 

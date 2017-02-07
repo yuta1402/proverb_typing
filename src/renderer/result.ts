@@ -6,6 +6,10 @@ import PlayerRecorder from './playerRecorder'
 const win = remote.getCurrentWindow();
 
 document.addEventListener('keydown', (e) => {
+    if(e.key == 'Escape') {
+        win.close();
+    }
+
     if(e.key == ' ') {
         win.loadURL(url.format({
             pathname: path.join(__dirname, 'title.html'),
