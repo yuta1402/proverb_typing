@@ -35,11 +35,24 @@
             }
 
             h1 {
-                font-size: 64px;
+                font-size: 90px;
             }
 
             p {
                 font-size: 24px;
+            }
+
+            .japaneseLogo {
+                font-size: 32px;
+                margin: 40px 0 0 0;
+            }
+
+            .englishLogo {
+                font-size: 90px;
+                margin: 0 0 60px 0;
+            }
+
+            .blink {
                 animation: blink 0.5s ease-in-out infinite alternate;
             }
 
@@ -51,8 +64,9 @@
     </head>
     <body>
         <div id="content">
-            <h1>Proverb Typing</h1>
-            <p>Press space key to start.</p>
+            <p class="japaneseLogo">ことわざタイピング</p>
+            <h1 class="englishLogo">Proverb Typing</h1>
+            <p class="blink">Press space key to start.</p>
         </div>
         <script src="./title.js"></script>
     </body>
