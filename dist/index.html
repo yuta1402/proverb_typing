@@ -54,6 +54,7 @@
             #word {
                 border: solid 2px;
                 margin: 40px;
+                margin-top: 0;
                 padding: 20px;
                 font-size: 36px;
                 text-align: center;
@@ -99,11 +100,24 @@
                 0%   { transform: scaleY(0); opacity: 0; }
                 100% { transform: scaleY(1); opacity: 1; }
             }
+
+            #questionCount {
+                margin-top: 40px;
+                width: 820px;
+                text-align: left;
+                font-size: 20px;
+            }
+
+            #questionCount:before {
+                content: "Question ";
+            }
+
         </style>
     </head>
     <body>
         <div id="content">
             <div id="currentTime"></div>
+            <div id="questionCount"></div>
             <div id="word">
                 <p id="japaneseWord" class="text-scale-up"></p>
                 <p id="originalWord" class="text-scale-up"></p>

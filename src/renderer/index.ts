@@ -40,6 +40,9 @@ stopwatch.start((t) => {
     currentTimeElement.textContent = t.clock;
 });
 
+const questionCountElement = document.getElementById('questionCount');
+questionCountElement.textContent = '1/10';
+
 const win = remote.getCurrentWindow();
 
 document.addEventListener('keydown', (e) => {
@@ -89,6 +92,8 @@ document.addEventListener('keydown', (e) => {
 
         keyQueue = '';
         typedWordElement.textContent = '';
+
+        questionCountElement.textContent = (questionGenerator.index+1) + '/10';
 
         return;
     }

@@ -26,7 +26,7 @@ interface Question {
 }
 
 export default class QuestionGenerator {
-    private index: number;
+    private _index: number;
     private questions: Array<Question>;
     private allQuestions: Array<Question>;
 
@@ -36,7 +36,7 @@ export default class QuestionGenerator {
     }
 
     public init(): void {
-        this.index = 0;
+        this._index = 0;
         this.questions = new Array<Question>();
 
         // for (let i = 0; i < this.numQuestion; ++i) {
@@ -54,13 +54,13 @@ export default class QuestionGenerator {
     }
 
     public next(): Question {
-        this.index++;
+        this._index++;
 
         if(this.isEnd()) {
             return null;
         }
 
-        return this.questions[this.index];
+        return this.questions[this._index];
     }
 
     public current(): Question {
@@ -68,7 +68,7 @@ export default class QuestionGenerator {
             return null;
         }
 
-        return this.questions[this.index];
+        return this.questions[this._index];
     }
 
     public currentEnglish(): string {
@@ -88,6 +88,10 @@ export default class QuestionGenerator {
     }
 
     public isEnd(): boolean {
-        return this.index >= this.numQuestion;
+        return this._index >= this.numQuestion;
+    }
+
+    get index(): number {
+        return this._index;
     }
 }
