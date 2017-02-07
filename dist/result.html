@@ -35,13 +35,64 @@
             }
 
             h1 {
+                margin: 0;
+                margin-bottom: 20px;
                 font-size: 64px;
+            }
+
+            table {
+                /* border-collapse: separate; */
+                border-spacing: 0px;
+                /* line-height: 1.5; */
+            }
+
+            table th {
+                width: 150px;
+                padding: 10px;
+                font-weight: bold;
+                vertical-align: bottom;
+                border-bottom: solid 1px;
+            }
+
+            table td {
+                width: 200px;
+                padding: 10px;
+                font-size: 24px;
+                text-align: center;
+                vertical-align: top;
+                border-bottom: solid 1px;
             }
         </style>
     </head>
     <body>
         <div id="content">
             <h1>Result</h1>
+            <table>
+                <tr>
+                    <th>問題文の総文字数</th>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th>入力した総文字数</th>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th>脱落誤り総数</th>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th>挿入誤り総数</th>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th>置換誤り総数</th>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th>時間</th>
+                    <td>0</td>
+                </tr>
+            </table>
         </div>
         <script src="./result.js"></script>
     </body>

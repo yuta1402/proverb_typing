@@ -40,3 +40,23 @@ app.on('activate', () => {
         createWindow();
     }
 });
+
+interface PlayerRecord {
+    N: number;
+    M: number;
+    D: number;
+    I: number;
+    S: number;
+    T: number;
+}
+
+declare global {
+    namespace NodeJS {
+        interface Global {
+            sharedObject: any;
+            test: string;
+        }
+    }
+}
+
+global.sharedObject = new Object();

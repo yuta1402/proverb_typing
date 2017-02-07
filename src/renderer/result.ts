@@ -13,3 +13,7 @@ document.addEventListener('keydown', (e) => {
         }));
     }
 });
+
+console.log(remote.getGlobal('sharedObject').playerRecord);
+
+console.log(JSON.parse(localStorage.getItem('test')));
