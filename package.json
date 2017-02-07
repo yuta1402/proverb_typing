@@ -1,14 +1,14 @@
 {
-  "name": "proverb_typing",
+  "name": "ProverbTyping",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/main.js",
   "scripts": {
     "start": "electron ./dist/main.js",
     "build": "webpack && npm run start",
-    "pack-mac": "electron-packager . proverb_typing --asar --overwrite --platform=darwin --arch=x64",
-    "pack-win": "electron-packager . proverb_typing --asar --overwrite --platform=win32 --arch=x64",
-    "pack-linux": "electron-packager . proverb_typing --asar --overwrite --platform=linux --arch=x64",
+    "pack-mac": "electron-packager . ProverbTyping --asar --overwrite --platform=darwin --arch=x64",
+    "pack-win": "electron-packager . ProverbTyping --asar --overwrite --platform=win32 --arch=x64",
+    "pack-linux": "electron-packager . ProverbTyping --asar --overwrite --platform=linux --arch=x64",
     "package": "npm run pack-mac && npm run pack-win && npm run pack-linux"
   },
   "author": "gut",
