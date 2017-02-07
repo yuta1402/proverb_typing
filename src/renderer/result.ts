@@ -1,6 +1,7 @@
 import * as url from 'url'
 import * as path from 'path'
 import { remote } from 'electron'
+import PlayerRecorder from './playerRecorder'
 
 const win = remote.getCurrentWindow();
 
@@ -14,5 +15,13 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+const playerRecord = JSON.parse(localStorage.getItem('PlayerRecord'))
+const ElemNames = ['N', 'M', 'D', 'I', 'S', 'T', 'inputTimeAverage', 'score'];
 
-console.log(JSON.parse(localStorage.getItem('PlayerRecord')));
+// 結果を反映させる
+for(let n of ElemNames) {
+    const e = document.getElementById(n);
+    e.textContent = String(playerRecord[n]);
+}
+
+console.log(playerRecord);
